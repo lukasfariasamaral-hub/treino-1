@@ -2,14 +2,14 @@ import pandas as pd
 import matplotlib.pyplot as plt
 df = pd.read_csv('dataset_financeiro_treino.csv')
 
-maiores_clientes = df.groupby('cliente')['valor'].sum().sort_values(ascending=False)
-print(maiores_clientes)
+df_impostos = df[df['categoria'] == 'Impostos'] #adicionando o filtro#
+
+metodo = df_impostos.groupby('cliente')['valor'].sum().sort_values() 
+print(metodo)
 
 # Criar o gráfico
-maiores_clientes.plot(kind='bar', color='steelblue')
-plt.title('Total de Valor por Cliente')
-plt.xlabel('Cliente')
-plt.ylabel('Valor Total (€)')
-plt.xticks(rotation=45)
-plt.tight_layout()
+metodo.plot(kind='bar', title='impostos por clientes');
+plt.xlabel('cliente')
+plt.ylabel('total impostos')
 plt.show()
+
